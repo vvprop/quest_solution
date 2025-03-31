@@ -1,0 +1,19 @@
+resource "docker_image" "node_image" {
+  name = "node:10"
+}
+
+resource "docker_container" "node_container" {
+  image = docker_image.node_image.latest
+  name = "my-node-container"
+  # Add other container settings as needed, e.g., ports, environment variables, etc.
+  # Example:
+  # ports {
+  #   internal = 3000
+  #   external = 3000
+  # }
+
+  services:
+  webapp:
+    environment:
+      index_page: "SECRET_WORD"
+}
